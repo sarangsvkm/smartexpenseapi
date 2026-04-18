@@ -21,6 +21,9 @@ services:
     env_file:
       - .env
     environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/smartexpense_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123
       SMARTEXPENSE_JWT_SECRET: smartexpenseSecretKeyForInterviewPurposeOnly12345
     ports:
       - "8080:8080"

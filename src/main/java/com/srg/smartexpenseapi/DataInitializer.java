@@ -72,6 +72,11 @@ public class DataInitializer implements CommandLineRunner {
             System.out.println("Categories initialized.");
         }
 
+        if (isBlank(adminUsername) || isBlank(adminEmail) || isBlank(adminPassword)) {
+            System.out.println("Admin user initialization skipped: admin credentials not configured.");
+            return;
+        }
+
         if (!userRepository.existsByUsername(adminUsername)) {
             User admin = new User(adminUsername, adminEmail, passwordEncoder.encode(adminPassword));
             Set<Role> roles = new HashSet<>();
@@ -82,5 +87,9 @@ public class DataInitializer implements CommandLineRunner {
             userRepository.save(admin);
             System.out.println("Admin user initialized.");
         }
+    }
+
+    private boolean isBlank(String value) {
+        return value == null || value.trim().isEmpty();
     }
 }
